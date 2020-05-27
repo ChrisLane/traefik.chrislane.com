@@ -1,0 +1,27 @@
+api:
+  dashboard: true
+  insecure: false
+
+entryPoints:
+  web:
+    address: :80
+  web-secure:
+    address: :443
+  ipfs:
+    address: :4001
+
+providers:
+  docker:
+    endpoint: unix:///var/run/docker.sock
+    exposedByDefault: false
+  file:
+    directory: /rules
+    watch: true
+
+certificatesResolvers:
+  letsencrypt:
+    acme:
+      email: webmaster@chrislane.com
+      storage: acme.json
+      dnsChallenge:
+        provider: cloudflare

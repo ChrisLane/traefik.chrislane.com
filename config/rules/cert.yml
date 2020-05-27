@@ -1,0 +1,20 @@
+http:
+  routers:
+    certs:
+      entryPoints:
+        - web
+        - web-secure
+      service: service-blank
+      rule: Host("about:blank")
+      tls:
+        certResolver: letsencrypt
+        domains:
+          - main: "*.chrislane.com"
+            sans:
+              - chrislane.com
+
+  services:
+    service-blank:
+      loadBalancer:
+        servers:
+          - url: "https://about.blank"
