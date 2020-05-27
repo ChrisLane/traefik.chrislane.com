@@ -21,8 +21,9 @@ services:
       - ./data/cf-dns-api-token:/cf-dns-api-token:ro
       - ./data/users:/users:ro
       - ./data/acme.json:/acme.json
-    env_file:
-      - .env
+    environment:
+      - CF_ZONE_API_TOKEN_FILE=/cf-zone-api-token
+      - CF_DNS_API_TOKEN_FILE=/cf-dns-api-token
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik.entrypoints=web"
