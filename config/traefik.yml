@@ -9,6 +9,8 @@ entryPoints:
     address: :443
   ipfs:
     address: :4001
+  matrix:
+    address: :8448
 
 providers:
   docker:
