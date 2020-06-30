@@ -7,10 +7,8 @@ entryPoints:
     address: :80
   web-secure:
     address: :443
-  ipfs-tcp:
-    address: ":4001/tcp"
-  ipfs-udp:
-    address: ":4001/udp"
+  ipfs:
+    address: :4001
   matrix:
     address: :8448
   kipa:
