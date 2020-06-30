@@ -11,6 +11,8 @@ entryPoints:
     address: :4001
   matrix:
     address: :8448
+  kipa:
+    address: :10842
 
 providers:
   docker:
