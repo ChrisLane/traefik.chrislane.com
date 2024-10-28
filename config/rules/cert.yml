@@ -5,7 +5,7 @@ http:
         - web
         - web-secure
       service: service-blank
-      rule: Host("about:blank")
+      rule: Host(`about:blank`)
       tls:
         certResolver: letsencrypt
         domains:

@@ -4,24 +4,31 @@ api:
 
 entryPoints:
   web:
-    address: :80
+    address: ":80"
+    http:
+      redirections:
+        entryPoint:
+          to: web-secure
   web-secure:
-    address: :443
+    address: ":443"
+    http:
+      middlewares:
+        - secured-hsts@file
   ipfs-tcp:
-    address: :4001
+    address: ":4001"
   ipfs-udp:
     address: ":4001/udp"
   matrix:
-    address: :8448
+    address: ":8448"
   kipa:
-    address: :10842
+    address: ":10842"
 
 providers:
   docker:
     endpoint: unix:///var/run/docker.sock
     exposedByDefault: false
   file:
-    directory: /rules
+    directory: "/rules"
     watch: true
 
 certificatesResolvers:
@@ -30,7 +37,7 @@ certificatesResolvers:
       email: webmaster@chrislane.com
       storage: acme.json
       dnsChallenge:
-        provider: cloudflare
+        provider: CLOUDFLARE
         disablePropagationCheck: false
         resolvers:
           - "1.1.1.1:53"

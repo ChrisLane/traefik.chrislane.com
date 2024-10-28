@@ -1,6 +1,6 @@
 services:
   traefik:
-    image: traefik:latest
+    image: traefik:v3.2.0
     container_name: traefik
     restart: unless-stopped
     security_opt:
@@ -28,16 +28,19 @@ services:
       - CF_DNS_API_TOKEN_FILE=/cf-dns-api-token
     labels:
       - "traefik.enable=true"
+      # HTTP Router
       - "traefik.http.routers.traefik.entrypoints=web"
       - "traefik.http.routers.traefik.rule=Host(`traefik.chrislane.com`)"
-      - "traefik.http.middlewares.traefik-auth.basicauth.usersfile=/users"
       - "traefik.http.routers.traefik.middlewares=secured-hsts@file"
+      # HTTPS Router
       - "traefik.http.routers.traefik-secure.entrypoints=web-secure"
       - "traefik.http.routers.traefik-secure.rule=Host(`traefik.chrislane.com`)"
-      - "traefik.http.routers.traefik-secure.middlewares=traefik-auth"
       - "traefik.http.routers.traefik-secure.tls=true"
       - "traefik.http.routers.traefik-secure.tls.certresolver=letsencrypt"
       - "traefik.http.routers.traefik-secure.service=api@internal"
+      - "traefik.http.routers.traefik-secure.middlewares=traefik-auth"
+      # Auth Middleware
+      - "traefik.http.middlewares.traefik-auth.basicauth.usersfile=/users"
 
 networks:
   proxy:

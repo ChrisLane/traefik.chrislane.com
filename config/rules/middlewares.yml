@@ -1,26 +1,26 @@
 http:
   middlewares:
-    https-redirect:
-      redirectScheme:
-        scheme: https
-
-    default-headers:
-      headers:
-        frameDeny: true
-        sslRedirect: true
-        browserXssFilter: true
-        contentTypeNosniff: true
-
-    default-hsts-headers:
-      headers:
-        forceSTSHeader: true
-        sslRedirect: true
-        stsPreload: true
-        stsSeconds: 63072000
-        stsIncludeSubdomains: true
-
     secured-hsts:
       chain:
         middlewares:
         - default-headers
         - default-hsts-headers
+
+    https-redirect:
+      redirectScheme:
+        scheme: https
+        permanent: true
+
+    default-headers:
+      headers:
+        frameDeny: true
+        browserXssFilter: true
+        contentTypeNosniff: true
+        referrerPolicy: "no-referrer"
+
+    default-hsts-headers:
+      headers:
+        forceSTSHeader: true
+        stsPreload: true
+        stsSeconds: 63072000
+        stsIncludeSubdomains: true
