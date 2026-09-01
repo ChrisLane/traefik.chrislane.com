@@ -14,6 +14,7 @@ entryPoints:
     http:
       middlewares:
         - secured-hsts@file
+    http3: {}
   ipfs-tcp:
     address: ":4001"
   ipfs-udp:
